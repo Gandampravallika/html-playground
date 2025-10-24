@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<title>
+    JavaScript Embedding Example
+</title> 
+<!---External JavaScript-->
+<script>src="script.js"</script>
+</head>
+<body>
+    <h1>Welcome to JavaScript Demo</h1>
+    <button onclick="internalfunction()">Run Internal JS</button>
+    <button onclick="externalfunction()">Run External JS</button>
+    <!---Internal JavaScript-->
+    <script>
+    function internalfunction(){
+       alert("Hello from internal JavaScript!")
+    }
+    </script>
+</body>
+

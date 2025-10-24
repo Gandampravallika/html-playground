@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Website Color Themes — Demo</title>
+
+  <!-- Basic reset & typography -->
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text: #222;
+      --muted: #555;
+      --card: #f7f7f7;
+      --accent: #2b7cff;
+      --radius: 12px;
+      --gap: 1rem;
+      --maxw: 1100px;
+      --mono-1: #1f2937;
+      --mono-2: #374151;
+      --mono-3: #9ca3af;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.45;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:2rem;
+      display:flex;
+      justify-content:center;
+    }
+
+    .wrap{
+      width:100%;
+      max-width:var(--maxw);
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      margin-bottom:1.2rem;
+    }
+    .logo{
+      background:linear-gradient(135deg,var(--accent),#6dd4ff);
+      color:white;
+      padding:.6rem .9rem;
+      font-weight:600;
+      border-radius:10px;
+      box-shadow:0 6px 18px rgba(43,124,255,.14);
+    }
+    h1{margin:0;font-size:1.4rem}
+    p.lead{margin:0;color:var(--muted);font-size:.95rem}
+
+    main{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:var(--gap);
+      align-items:start;
+    }
+
+    /* ARTICLE */
+    article{
+      background:linear-gradient(180deg, rgba(0,0,0,0.01), transparent);
+      padding:1.2rem;
+      border-radius:var(--radius);
+      box-shadow:0 4px 18px rgba(12,20,30,.04);
+    }
+    article h2{margin-top:0}
+    .section{
+      margin-bottom:1rem;
+    }
+    .image-ref{
+      font-size:.85rem;
+      color:var(--muted);
+      margin-top:.25rem;
+    }
+
+    /* THEME PANEL */
+    .panel{
+      background:var(--card);
+      padding:1rem;
+      border-radius:var(--radius);
+      box-shadow:0 6px 20px rgba(12,20,30,.04);
+      position:sticky;
+      top:2rem;
+      height:fit-content;
+    }
+    .panel h3{margin:0 0 .5rem 0}
+    .swatches{display:flex;flex-direction:column;gap:.7rem}
+    .swatch-row{display:flex;gap:.5rem;align-items:center;}
+    .swatch{
+      width:46px;height:46px;border-radius:8px;box-shadow:0 6px 12px rgba(12,20,30,.06);
+      display:flex;align-items:center;justify-content:center;font-weight:600;color:white;
+      font-size:.8rem;
+    }
+    .swatch-label{font-size:.85rem;color:var(--muted);min-width:110px}
+
+    /* theme preview card */
+    .preview{
+      margin-top:.9rem;
+      border-radius:10px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.04);
+      background:linear-gradient(180deg, rgba(255,255,255,.6), rgba(0,0,0,.01));
+    }
+    .preview .hero{
+      padding:1rem;
+      display:flex;
+      gap:1rem;
+      align-items:center;
+      background:linear-gradient(90deg, rgba(0,0,0,.03), transparent);
+    }
+    .preview h4{margin:0}
+    .btn{
+      padding:.5rem .75rem;border-radius:10px;border:0;cursor:pointer;font-weight:600;
+      box-shadow:0 8px 20px rgba(0,0,0,.06)
+    }
+    .controls{display:flex;gap:.5rem;margin-top:.6rem;flex-wrap:wrap}
+    .note{font-size:.85rem;color:var(--muted);margin-top:.6rem}
+
+    /* palette gallery in article */
+    .palette-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;margin-top:.6rem}
+    .palette{
+      padding:.9rem;border-radius:10px;background:var(--card);border:1px solid rgba(0,0,0,.03)
+    }
+    .palette h5{margin:0 0 .5rem 0;font-size:1rem}
+    .colors{display:flex;gap:.4rem;align-items:center}
+    .color-box{flex:1;height:56px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:600}
+
+    footer{margin-top:1.2rem;color:var(--muted);font-size:.9rem}
+
+    /* responsive */
+    @media (max-width:980px){
+      main{grid-template-columns:1fr;align-items:stretch}
+    }
+
+    /* ------------------------------------------------------------------
+       Themes defined with CSS variables below.
+       Each theme block will override --accent and more.
+       The JS toggles a class on <body> to apply the theme.
+       ------------------------------------------------------------------ */
+
+    /* Monochrome theme (grayscale) */
+    body.theme-mono{
+      --bg: #f5f6f7;
+      --card: #ffffff;
+      --text: #212529;
+      --muted: #52575c;
+      --accent: #374151;
+      --mono-1: #111827;
+      --mono-2: #374151;
+      --mono-3: #9ca3af;
+    }
+
+    /* Analogous (blue-green shades) */
+    body.theme-analogous{
+      --bg:#f6fbfc;
+      --card:#ffffff;
+      --text:#05233b;
+      --muted:#3e6b78;
+      --accent:#0b7285; /* teal */
+      --accent-2:#16a085;
+      --accent-3:#2dc6b6;
+    }
+
+    /* Complementary (blue / orange) */
+    body.theme-complementary{
+      --bg:#fffaf7;
+      --card:#ffffff;
+      --text:#2b2b2b;
+      --muted:#6f6f6f;
+      --accent:#2b7cff; /* blue */
+      --accent-compl:#ff8a29; /* orange */
+    }
+
+    /* Triadic (red, blue, yellow) */
+    body.theme-triadic{
+      --bg:#fffdf8;
+      --card:#ffffff;
+      --text:#222;
+      --muted:#555;
+      --accent:#e11d48; /* red/pink */
+      --accent-2:#0ea5e9; /* blue */
+      --accent-3:#f59e0b; /* amber */
+    }
+
+    /* Split complementary (purple & green accents) */
+    body.theme-split{
+      --bg:#fbfbff;
+      --card:#ffffff;
+      --text:#1f2340;
+      --muted:#56607a;
+      --accent:#7c3aed; /* purple */
+      --accent-2:#10b981; /* green */
+      --accent-3:#60a5fa; /* soft blue */
+    }
+
+    /* Square/Rectangle (balanced multis) */
+    body.theme-square{
+      --bg:#ffffff;
+      --card:#fbfdff;
+      --text:#0f172a;
+      --muted:#4b5563;
+      --accent:#ef4444; /* red */
+      --accent-2:#06b6d4; /* cyan */
+      --accent-3:#f59e0b; /* amber */
+      --accent-4:#7c3aed; /* purple */
+    }
+
+    /* small utilities for text over swatches */
+    .weak{opacity:.9;font-size:.83rem}
+    .contrast-okay{font-size:.78rem;padding:.2rem .45rem;border-radius:6px;background:rgba(255,255,255,.12)}
+  </style>
+</head>
+<body class="theme-complementary">
+  <div class="wrap">
+    <header>
+      <div class="logo">Color Themes</div>
+      <div>
+        <h1>Creating themes — color schemes for websites</h1>
+        <p class="lead">Quick examples of common color schemes (monochrome, analogous, complementary, triadic, split, square/rectangle) and how to use them in UI.</p>
+      </div>
+    </header>
+
+    <main>
+      <!-- article content -->
+      <article>
+        <section class="section">
+          <h2>Overview</h2>
+          <p>
+            The combination of colors used in the design of a website is called a <strong>color scheme</strong>. Colors set tone and mood — web developers use color theory and the color wheel to pick harmonious palettes.
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Color theory basics</h2>
+          <p>
+            Primary colors are red, yellow and blue. Secondary colors (orange, purple, green) are mixes of primaries. Tertiary colors and tints form the 12-color <em>color wheel</em>. Designers use relative positions on the wheel to form schemes.
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Common color schemes</h2>
+          <p>There are seven commonly used schemes:</p>
+          <ul>
+            <li>Monochromatic</li>
+            <li>Analogous</li>
+            <li>Complementary</li>
+            <li>Split complementary</li>
+            <li>Triadic</li>
+            <li>Square</li>
+            <li>Rectangle</li>
+          </ul>
+
+          <div class="image-ref">
+            Image source: <a href="https://www.moving.com/tips/how-to-choose-a-color-scheme-for-your-home/" target="_blank" rel="noopener">moving.com — how to choose a color scheme</a>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Using schemes on the web</h2>
+          <p>
+            Choose a scheme based on your site's purpose — e.g. complementary colors can highlight data visualizations; medical or informational sites often favor white backgrounds and muted accents. Keep UX first: avoid cognitive overload and use color to create clear visual hierarchy.
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Theme gallery (interactive)</h2>
+          <p>Click a theme on the right to preview it below. Each palette shows primary swatches and example usage on headings, buttons and cards.</p>
+
+          <div class="palette-gallery" id="palettes">
+            <!-- Mono -->
+            <div class="palette" data-scheme="mono">
+              <h5>Monochromatic (grayscale)</h5>
+              <div class="colors">
+                <div class="color-box" style="background:#111827">#111827</div>
+                <div class="color-box" style="background:#374151">#374151</div>
+                <div class="color-box" style="background:#9ca3af;color:#111">#9ca3af</div>
+              </div>
+            </div>
+
+            <!-- Analogous -->
+            <div class="palette" data-scheme="analogous">
+              <h5>Analogous (blue → teal)</h5>
+              <div class="colors">
+                <div class="color-box" style="background:#0b7285">#0b7285</div>
+                <div class="color-box" style="background:#16a085">#16a085</div>
+                <div class="color-box" style="background:#2dc6b6;color:#042226">#2dc6b6</div>
+              </div>
+            </div>
+
+            <!-- Complementary -->
+            <div class="palette" data-scheme="complementary">
+              <h5>Complementary (blue ↔ orange)</h5>
+              <div class="colors">
+                <div class="color-box" style="background:#2b7cff">#2b7cff</div>
+                <div class="color-box" style="background:#ff8a29">#ff8a29</div>
+                <div class="color-box" style="background:#6ec8ff;color:#042944">#6ec8ff</div>
+              </div>
+            </div>
+
+            <!-- Triadic -->
+            <div class="palette" data-scheme="triadic">
+              <h5>Triadic (red, blue, amber)</h5>
+              <div class="colors">
+                <div class="color-box" style="background:#e11d48">#e11d48</div>
+                <div class="color-box" style="background:#0ea5e9">#0ea5e9</div>
+                <div class="color-box" style="background:#f59e0b">#f59e0b</div>
+              </div>
+            </div>
+
+            <!-- Split complementary -->
+            <div class="palette" data-scheme="split">
+              <h5>Split complementary (purple & green)</h5>
+              <div class="colors">
+                <div class="color-box" style="background:#7c3aed">#7c3aed</div>
+                <div class="color-box" style="background:#10b981">#10b981</div>
+                <div class="color-box" style="background:#60a5fa">#60a5fa</div>
+              </div>
+            </div>
+
+            <!-- Square -->
+            <div class="palette" data-scheme="square">
+              <h5>Square / Rectangle (multicolor)</h5>
+              <div class="colors">
+                <div class="color-box" style="background:#ef4444">#ef4444</div>
+                <div class="color-box" style="background:#06b6d4">#06b6d4</div>
+                <div class="color-box" style="background:#7c3aed">#7c3aed</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          <div>Tip: maintain a small palette (1-3 primary active colors + neutrals) and use tints/shades for depth.</div>
+        </footer>
+      </article>
+
+      <!-- right panel with interactive theme switcher & preview -->
+      <aside class="panel" aria-label="Theme controls">
+        <h3>Theme preview</h3>
+        <div class="swatches" id="themeList">
+          <div class="swatch-row">
+            <div class="swatch-label">Monochromatic</div>
+            <button class="swatch" data-theme="theme-mono" style="background:#374151">M</button>
+          </div>
+
+          <div class="swatch-row">
+            <div class="swatch-label">Analogous</div>
+            <button class="swatch" data-theme="theme-analogous" style="background:#0b7285">A</button>
+          </div>
+
+          <div class="swatch-row">
+            <div class="swatch-label">Complementary</div>
+            <button class="swatch" data-theme="theme-complementary" style="background:#2b7cff">C</button>
+            <div style="flex:1"></div>
+          </div>
+
+          <div class="swatch-row">
+            <div class="swatch-label">Triadic</div>
+            <button class="swatch" data-theme="theme-triadic" style="background:#e11d48">T</button>
+          </div>
+
+          <div class="swatch-row">
+            <div class="swatch-label">Split complementary</div>
+            <button class="swatch" data-theme="theme-split" style="background:#7c3aed">S</button>
+          </div>
+
+          <div class="swatch-row">
+            <div class="swatch-label">Square / Rectangle</div>
+            <button class="swatch" data-theme="theme-square" style="background:#ef4444">Q</button>
+          </div>
+        </div>
+
+        <div class="preview" id="previewCard" aria-live="polite">
+          <div class="hero" id="heroPreview">
+            <div style="flex:1">
+              <h4 id="previewTitle">Complementary — Blue & Orange</h4>
+              <div class="weak" id="previewSubtitle">Use complementary accents for charts, CTAs and highlights.</div>
+            </div>
+            <div style="display:flex;gap:.5rem;align-items:center">
+              <button class="btn" id="primaryBtn">Primary</button>
+              <button class="btn" id="secondaryBtn" style="opacity:.95">Secondary</button>
+            </div>
+          </div>
+
+          <div style="padding:1rem">
+            <p class="note">Sample card demonstrating headings, text, and buttons in the selected theme.</p>
+            <div style="display:flex;gap:.6rem;margin-top:.6rem;flex-wrap:wrap">
+              <div style="flex:1;min-width:160px;padding:.8rem;border-radius:10px;background:linear-gradient(180deg,rgba(0,0,0,.02),transparent);">
+                <strong>Card title</strong>
+                <p class="weak" style="margin:.4rem 0 0 0">Information with theme accent as the callout.</p>
+              </div>
+
+              <div style="flex:1;min-width:160px;padding:.8rem;border-radius:10px;background:linear-gradient(180deg,rgba(0,0,0,.02),transparent);">
+                <strong>Chart sample</strong>
+                <p class="weak" style="margin:.4rem 0 0 0">Use complementary colors to separate data series.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button class="btn" id="resetBtn">Reset to default</button>
+          <button class="btn" id="copyCss">Copy CSS vars</button>
+        </div>
+
+        <div class="note">Accessibility: ensure sufficient contrast between background and text. Use a neutral background, with 1–3 accent colors.</div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- JS: theme switching + copy CSS vars -->
+  <script>
+    (function(){
+      const body = document.body;
+      const previewTitle = document.getElementById('previewTitle');
+      const hero = document.getElementById('heroPreview');
+      const primaryBtn = document.getElementById('primaryBtn');
+      const secondaryBtn = document.getElementById('secondaryBtn');
+
+      // mapping theme -> label and sample accents
+      const THEMES = {
+        'theme-mono': {
+          label: 'Monochromatic (grayscale)',
+          title: 'Monochrome — Grayscale',
+          primary: getComputedStyle(document.documentElement).getPropertyValue('--mono-1') || '#111827'
+        },
+        'theme-analogous': {
+          label: 'Analogous (blue → teal)',
+          title: 'Analogous — Blue & Teal',
+          primary: '#0b7285',
+          secondary: '#16a085'
+        },
+        'theme-complementary': {
+          label: 'Complementary (blue ↔ orange)',
+          title: 'Complementary — Blue & Orange',
+          primary: '#2b7cff',
+          secondary: '#ff8a29'
+        },
+        'theme-triadic': {
+          label: 'Triadic (red, blue, amber)',
+          title: 'Triadic — Red, Blue, Amber',
+          primary: '#e11d48',
+          secondary: '#0ea5e9'
+        },
+        'theme-split': {
+          label: 'Split complementary (purple & green)',
+          title: 'Split complementary — Purple & Green',
+          primary: '#7c3aed',
+          secondary: '#10b981'
+        },
+        'theme-square': {
+          label: 'Square / Rectangle (multicolor)',
+          title: 'Square — Multicolor accents',
+          primary: '#ef4444',
+          secondary: '#06b6d4'
+        }
+      };
+
+      // add click handlers for theme buttons
+      document.querySelectorAll('[data-theme]').forEach(btn=>{
+        btn.addEventListener('click', () => {
+          const cls = btn.getAttribute('data-theme');
+          // remove other theme- classes (we defined them explicitly)
+          document.body.classList.remove('theme-mono','theme-analogous','theme-complementary','theme-triadic','theme-split','theme-square');
+          document.body.classList.add(cls);
+
+          const meta = THEMES[cls] || {};
+          previewTitle.textContent = meta.title || 'Theme preview';
+          // primary/secondary button colors
+          primaryBtn.style.background = meta.primary || 'var(--accent)';
+          primaryBtn.style.color = getContrastYIQ(meta.primary || getComputedStyle(document.documentElement).getPropertyValue('--accent'));
+          secondaryBtn.style.background = meta.secondary || shadeColor(meta.primary || getComputedStyle(document.documentElement).getPropertyValue('--accent'), 20);
+          secondaryBtn.style.color = getContrastYIQ(meta.secondary || shadeColor(meta.primary || getComputedStyle(document.documentElement).getPropertyValue('--accent'), 20));
+        });
+      });
+
+      // reset button
+      document.getElementById('resetBtn').addEventListener('click', ()=>{
+        // default class used on load
+        body.className = 'theme-complementary';
+        document.querySelector('[data-theme="theme-complementary"]').click();
+      });
+
+      // copy CSS variables
+      document.getElementById('copyCss').addEventListener('click', async ()=>{
+        const styles = getComputedStyle(document.body);
+        // collect commonly used vars from :root
+        const keys = ['--bg','--card','--text','--muted','--accent','--accent-2','--accent-3','--accent-4','--mono-1','--mono-2','--mono-3'];
+        let out = ':root {\n';
+        keys.forEach(k=>{
+          const v = styles.getPropertyValue(k).trim();
+          if(v) out += '  ' + k + ': ' + v + ';\n';
+        });
+        out += '}';
+        try{
+          await navigator.clipboard.writeText(out);
+          alert('CSS variables copied to clipboard.');
+        }catch(e){
+          prompt('Copy these CSS variables manually:', out);
+        }
+      });
+
+      // helper: contrast color (black/white)
+      function getContrastYIQ(hexcolor){
+        if(!hexcolor) return '#fff';
+        hexcolor = hexcolor.replace('#','').trim();
+        if(hexcolor.length === 3){
+          hexcolor = hexcolor.split('').map(c=>c+c).join('');
+        }
+        const r = parseInt(hexcolor.substr(0,2),16);
+        const g = parseInt(hexcolor.substr(2,2),16);
+        const b = parseInt(hexcolor.substr(4,2),16);
+        const yiq = ((r*299)+(g*587)+(b*114))/1000;
+        return (yiq >= 128) ? '#000' : '#fff';
+      }
+
+      // helper: lighten/darken a hex color (percent -100..100)
+      function shadeColor(hex, percent) {
+        if(!hex) return hex;
+        hex = hex.replace('#','');
+        if(hex.length === 3) hex = hex.split('').map(c=>c+c).join('');
+        const num = parseInt(hex,16);
+        let r = (num >> 16) + Math.round(2.55 * percent);
+        let g = ((num >> 8) & 0x00FF) + Math.round(2.55 * percent);
+        let b = (num & 0x0000FF) + Math.round(2.55 * percent);
+        r = Math.max(0,Math.min(255,r));
+        g = Math.max(0,Math.min(255,g));
+        b = Math.max(0,Math.min(255,b));
+        return '#' + ( (1<<24) + (r<<16) + (g<<8) + b ).toString(16).slice(1);
+      }
+
+      // initialize preview with currently applied body class
+      (function init(){
+        const active = Array.from(document.body.classList).find(c => c.startsWith('theme-')) || 'theme-complementary';
+        const btn = document.querySelector('[data-theme="'+active+'"]');
+        if(btn) btn.click();
+      })();
+
+      // clicking a palette card also sets the theme
+      document.querySelectorAll('.palette').forEach(card=>{
+        card.addEventListener('click', ()=>{
+          const scheme = card.getAttribute('data-scheme');
+          const map = {
+            'mono':'theme-mono',
+            'analogous':'theme-analogous',
+            'complementary':'theme-complementary',
+            'triadic':'theme-triadic',
+            'split':'theme-split',
+            'square':'theme-square'
+          };
+          const cls = map[scheme];
+          if(cls) document.querySelector('[data-theme="'+cls+'"]').click();
+          // scroll preview into view
+          document.getElementById('previewCard').scrollIntoView({behavior:'smooth', block:'nearest'});
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

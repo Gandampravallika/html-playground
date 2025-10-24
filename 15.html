@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Print 1 to 10 Using For, While and Do-While Loops</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 20px;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin: 3px 0;
+        }
+    </style>
+    <script>
+        function printNumbers() {
+            // For Loop
+            let outputFor = "<h3>Using For Loop:</h3>";
+            for (let i = 1; i <= 10; i++) {
+                outputFor += "<h2>" + i + "</h2>";
+            }
+            document.getElementById("forOutput").innerHTML = outputFor;
+            // While Loop
+            let outputWhile = "<h3>Using While Loop:</h3>";
+            let numberWhile = 1;
+            while (numberWhile <= 10) {
+                outputWhile += "<h2>" + numberWhile + "</h2>";
+                numberWhile++;
+            }
+            document.getElementById("whileOutput").innerHTML = outputWhile;
+         // Do-While Loop
+            let outputDoWhile = "<h3>Using Do-While Loop:</h3>";
+            let numberDoWhile = 1;
+            do {
+                outputDoWhile += "<h2>" + numberDoWhile + "</h2>";
+                numberDoWhile++;
+            } while (numberDoWhile <= 10);
+            document.getElementById("doWhileOutput").innerHTML = outputDoWhile;
+        }
+    </script>
+</head>
+<body onload="printNumbers()">
+    <section id="forOutput"></section>
+    <section id="whileOutput"></section>
+    <section id="doWhileOutput"></section>
+</body>
+</html>
+
